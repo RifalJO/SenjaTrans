@@ -14,6 +14,81 @@ let currentIndex = 0;
 
   setInterval(nextSlide, 4000); // Ganti slide setiap 4 detik
 
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('navLinks');
+    const navbar = document.querySelector('.navbar');
+
+    // Toggle menu mobile
+    if (mobileMenu && navLinks) { // Pastikan elemen ada
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            // Menutup menu jika salah satu link diklik (opsional)
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        });
+    }
+
+    // Scroll effect for navbar (keeping your existing functionality)
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Slideshow functionality (from previous response)
+    const slides = document.querySelectorAll('.slide-img');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Initial display
+    showSlide(currentSlide);
+
+    // Change slide every 5 seconds (adjust as needed)
+    setInterval(nextSlide, 5000);
+
+    // Fade-in on scroll animation (if you have this JS)
+    const fadeInElements = document.querySelectorAll('.fade-in');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    fadeInElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+
 // Scroll Progress Bar
   window.addEventListener('scroll', () => {
     const scrollTop = document.documentElement.scrollTop;
