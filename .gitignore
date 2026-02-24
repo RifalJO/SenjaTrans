@@ -1,0 +1,36 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+senja-trans-nextjs/node_modules
+senja-trans-nextjs/.pnp
+senja-trans-nextjs/.pnp.js
+senja-trans-nextjs/.yarn/install-state.gz
+
+# testing
+senja-trans-nextjs/coverage
+
+# next.js
+senja-trans-nextjs/.next/
+senja-trans-nextjs/out/
+
+# production
+senja-trans-nextjs/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+senja-trans-nextjs/.env*.local
+
+# vercel
+senja-trans-nextjs/.vercel
+
+# typescript
+senja-trans-nextjs/*.tsbuildinfo
+senja-trans-nextjs/next-env.d.ts
